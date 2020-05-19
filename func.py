@@ -64,3 +64,10 @@ def load_extra_datasets():
     no_structure = np.random.rand(N, 2), np.random.rand(N, 2)
     
     return noisy_circles, noisy_moons, blobs, gaussian_quantiles, no_structure
+
+A=activation_function_value
+Y=Data_labels
+num=number_of_examples
+
+def loss_function(A,Y):
+    return -(1/m)*(np.sum((np.dot(np.log(A),Y.T)+np.dot(np.log(1-A),(1-Y.T)))
