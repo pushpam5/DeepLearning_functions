@@ -64,10 +64,40 @@ def load_extra_datasets():
     no_structure = np.random.rand(N, 2), np.random.rand(N, 2)
     
     return noisy_circles, noisy_moons, blobs, gaussian_quantiles, no_structure
-
+Arguments:
 A=activation_function_value
 Y=Data_labels
 num=number_of_examples
 
 def loss_function(A,Y):
-    return -(1/m)*(np.sum((np.dot(np.log(A),Y.T)+np.dot(np.log(1-A),(1-Y.T)))
+    return -(1/m)*(np.sum((np.dot(np.log(A),Y.T)+np.dot(np.log(1-A),(1-Y.T))
+                           
+Arguments:
+parameters:A dictionary with W1 and W2 values
+cache: A dictionary with Activation Function Values
+X:Training Examples
+Y:Data Labels
+                           
+def back_prop_gd_nn(parameters, cache, X, Y):
+     
+    m = X.shape[1]
+    
+    W1 = parameters["W1"]
+    W2 = parameters["W2"]
+    A1 = cache["A1"]
+    A2 = cache["A2"]
+                           
+    dZ2 = A2-Y
+    dW2 = (1/m)*np.dot(dZ2,A1.T)
+    db2 = (1/m)*np.sum(dZ2,axis=1,keepdims=True)
+    dZ1 = np.dot(W2.T,dZ2)*(1 - np.power(A1, 2))
+    dW1 = (1/m)*np.dot(dZ1,X.T)
+    db1 = (1/m)*np.sum(dZ1,axis=1,keepdims=True)
+   
+    
+    grads = {"dW1": dW1,
+             "db1": db1,
+             "dW2": dW2,
+             "db2": db2}
+    
+    return grads                     
