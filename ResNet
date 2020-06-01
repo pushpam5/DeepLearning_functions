@@ -109,3 +109,7 @@ def ResNet50(input_shape = (64, 64, 3), classes = 6):
    #Y_train = Training Labels 
    model.fit(X_train, Y_train, epochs = NO_OF_EPOCHS, batch_size = BATCH_SIZE)
    
+   model.summary()
+   
+   plot_model(model, to_file='model.png')
+   SVG(model_to_dot(model).create(prog='dot', format='svg'))
