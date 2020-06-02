@@ -9,13 +9,15 @@ def generate_noise_image(content_image, noise_ratio = CONFIG.NOISE_RATIO):
     return input_image
 
 
+#mean = mean(average)
 def reshape_and_normalize_image(image):
     
-    # Reshape image to mach expected input of VGG16
+    # Reshape image 
     image = np.reshape(image, ((1,) + image.shape))
     
-    # Substract the mean to match the expected input of VGG16
-    image = image - CONFIG.MEANS
+    # Substract the mean 
+    
+    image = image - mean
     
     return image
 
@@ -23,7 +25,7 @@ def reshape_and_normalize_image(image):
 def save_image(path, image):
     
     # Un-normalize the image so that it looks good
-    image = image + CONFIG.MEANS
+    image = image + mean
     
     # Clip and Save the image
     image = np.clip(image[0], 0, 255).astype('uint8')
