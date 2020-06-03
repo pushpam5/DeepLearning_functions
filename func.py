@@ -100,4 +100,6 @@ def back_prop_gd_nn(parameters, cache, X, Y):
              "dW2": dW2,
              "db2": db2}
     
-    return grads                     
+    return grads
+#li_char: represents list of characters                           
+char_to_ix = { ch:i for i,ch in enumerate(li_char) }
