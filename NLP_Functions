@@ -1,0 +1,14 @@
+#function to neutralize bias for non-gender specific words
+#word_to_vec: dictionary mapping words to their GloVe vector representation
+#e: encoding of word
+
+def neutralize(word, g, word_to_vec):
+    
+    e = word_to_vec[word]
+    
+    e_biascomponent = (np.dot(e,g) / (np.sum(np.dot(g,g)))) * g
+ 
+    # e_debiased should be equal to its orthogonal projection
+    e_debiased = e - e_biascomponent
+    
+    return e_debiased
