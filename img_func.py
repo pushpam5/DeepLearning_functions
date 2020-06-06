@@ -30,3 +30,14 @@ def save_image(path, image):
     # Clip and Save the image
     image = np.clip(image[0], 0, 255).astype('uint8')
     scipy.misc.imsave(path, image)
+
+#extracting zip files 
+import os
+import zipfile
+
+local_zip = location_zipfile
+
+zip_ref = zipfile.ZipFile(local_zip, 'r')
+
+zip_ref.extractall(destination_dir)
+zip_ref.close()
